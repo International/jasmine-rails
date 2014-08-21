@@ -20,6 +20,8 @@ namespace :spec do
     path = JasmineRails.route_path
     app.get path, :console => 'true', :spec => spec_filter
     JasmineRails::OfflineAssetPaths.disabled = true
+    puts "Jasmine response #{app.response.body}"
+
     raise "Jasmine runner at '#{path}' returned a #{app.response.status} error: #{app.response.message}" unless app.response.success?
     html = app.response.body
     runner_path = Rails.root.join('spec/tmp/runner.html')
